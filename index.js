@@ -15,3 +15,18 @@ server.use(cors())
 server.use('/', express.static(`${__dirname}/public/`))
 server.use(routes.router)
 
+
+mongoose.connect(connectionString, {
+  server: { socketOptions: { keepAlive: 30000, connectTimeoutMS: 30000 } }
+})
+
+
+connection.on('error', function(err){
+  console.log('Experienced connection issues', err)
+})
+
+connection.once('open', function(){
+  server.listen(port, function(){
+    console.log('Server is working', 'http://localhost:' + port)
+  })
+})
