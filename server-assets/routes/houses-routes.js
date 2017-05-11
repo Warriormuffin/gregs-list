@@ -16,14 +16,16 @@ function getHouses(req, res, next){
   House.find({}).then(function(houses){
     return res.send(houses)
   }).catch(function(err){
-    console.log('is' + err)
+    console.log('getHouse' + err)
   })
 }
 
 function createHouses(req, res, next){
-  var newCar = req.body
-    Car.create(newCar)
-    .then(function(newelyCreatedCar){
-      res.send(newlyCreatedCar)
+  var newHouse = req.body.house
+    House.create(newCar)
+    .then(function(newelyCreatedHouse){
+      res.send(newlyCreatedHouse)
+    }).catch(function(err){
+      console.log('createHouse' + err)
     })
 }

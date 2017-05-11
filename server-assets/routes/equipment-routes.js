@@ -11,7 +11,6 @@ router.route('/')
 router.route('/')
   .post(createEquipment)
 
-
 function getEquipment(req, res, next){
   Equipment.find({}).then(function(equipment){
     res.send(equipment)
@@ -19,9 +18,11 @@ function getEquipment(req, res, next){
 }
 
 function createEquipment(req, res, next){
-  var newEquipment = req.body
+  var newEquipment = req.body.equipment
     Equipment.create(newEquipment)
-    .then(function(newelyCreatedEquipment){
+    .then(function(newlyCreatedEquipment){
       res.send(newlyCreatedEquipment)
+    }).catch(function(err){
+      console.log(err)
     })
 }
