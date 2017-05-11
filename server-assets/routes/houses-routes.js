@@ -1,25 +1,29 @@
 var router = require('express').Router();
 var House = require('./../models/house-model')
 
-exports.mountPath = '/houses';
+exports.mountPath = '/houses'
 exports.router = router;
 
 router.route('/')
   .get(getHouses)
 
+
 router.route('/')
-  .post(saveHouses)
+  .post(createHouses)
 
 
-function getHouses(res, req, next){
-  House.find({}).then(function(house){
-    res.send(house)
+function getHouses(req, res, next){
+  House.find({}).then(function(houses){
+    return res.send(houses)
+  }).catch(function(err){
+    console.log('is' + err)
   })
 }
 
-function saveHouses(res, req, next){
-  var House = req.body
-    House.post(newelyCreatedHouse).then(function(newelyCreatedHouse){
-      res.send(newelyCreatedHouse)
+function createHouses(req, res, next){
+  var newCar = req.body
+    Car.create(newCar)
+    .then(function(newelyCreatedCar){
+      res.send(newlyCreatedCar)
     })
-  }
+}

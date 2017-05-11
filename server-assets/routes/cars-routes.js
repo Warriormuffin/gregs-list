@@ -14,7 +14,9 @@ router.route('/')
 
 function getCars(req, res, next){
   Car.find({}).then(function(cars){
-    res.send(cars)
+    return res.send(cars)
+  }).catch(function(err){
+    console.log('is' + err)
   })
 }
 
